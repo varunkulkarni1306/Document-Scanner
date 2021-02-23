@@ -7,7 +7,7 @@
 using namespace cv;
 using namespace std;
 
-/////////////// Project 2 – Document Scanner //////////////////////
+/////////////// Document Scanner //////////////////////
 
 Mat imgOriginal, imgGray, imgBlur, imgCanny, imgThre, imgDil, imgErode, imgWarp, imgCrop;
 vector<Point> initialPoints, docPoints;
@@ -107,19 +107,19 @@ void main() {
 	imgOriginal = imread(path);
 	//resize(imgOriginal, imgOriginal, Size(), 0.5, 0.5);
 
-	// Preprpcessing – Step 1
+	// Preprpcessing â€“ Step 1
 	imgThre = preProcessing(imgOriginal);
 
-	// Get Contours – Biggest – Step 2
+	// Get Contours â€“ Biggest â€“ Step 2
 	initialPoints = getContours(imgThre);
 	//drawPoints(initialPoints, Scalar(0, 0, 255));
 	docPoints = reorder(initialPoints);
 	//drawPoints(docPoints, Scalar(0, 255, 0));
 
-	// Warp – Step 3
+	// Warp â€“ Step 3
 	imgWarp = getWarp(imgOriginal, docPoints, w, h);
 
-	//Crop – Step 4
+	//Crop â€“ Step 4
 	int cropVal = 5;
 	Rect roi(cropVal, cropVal, w - (2 * cropVal), h -(2 * cropVal));
 	imgCrop = imgWarp(roi);
